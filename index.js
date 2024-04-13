@@ -4,7 +4,7 @@ const http = require('http');
 
 const requestHandler = (request, response) => {
   response.writeHead(200, {'Content-Type': 'text/plain'});
-  response.end('Hello World!\n');
+  response.end('Ya Allah \n By Al_Iraq1');
 };
 
 const server = http.createServer(requestHandler);
@@ -21,7 +21,7 @@ server.listen(port, (err) => {
 
 const bot = new Telegraf('6668072595:AAF5uTZeNcsX0dEWfWecYvt2tFgU_Wje2aA');
 
-bot.start((ctx) => ctx.reply('Welcome! Send me a file. \n Hi \n d'));
+bot.start((ctx) => ctx.reply('Welcome! Send me a file. \n In this bot you can upload files \n But you need to know : \n 1.After uplead any file you cant delete file after upload \n How to use ? \n Only upload your file and will upload \n\n By Al_Iraq1'));
 
 bot.on('document', async (ctx) => {
   try {
