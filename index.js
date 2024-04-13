@@ -21,7 +21,7 @@ server.listen(port, (err) => {
 
 const bot = new Telegraf('6668072595:AAF5uTZeNcsX0dEWfWecYvt2tFgU_Wje2aA');
 
-bot.start((ctx) => ctx.reply('Welcome! Send me a file. \n In this bot you can upload files \n But you need to know : \n 1.After uplead any file you cant delete file after upload \n How to use ? \n Only upload your file and will upload \n The maximum space the bot can upload is 25MB per file \n\n By Al_Iraq1'));
+bot.start((ctx) => ctx.reply('Welcome! Send me a file. \n In this bot you can upload files \n But you need to know : \n 1.After uplead any file you cant delete file after upload \n How to use ? \n Only upload your file and will upload \n The maximum space the bot can upload is 20MB per file \n\n By Al_Iraq1'));
 
 bot.on('document', async (ctx) => {
   try {
