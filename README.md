@@ -5,7 +5,7 @@ How to use :
 2. Start the bot.
 3. Go to your bot on Telegram and start the bot.
 
-[YouTube](https://youtube.com/@al_iraq1?feature=shared/)
+[YouTube](https://youtube.com/@حظر?feature=shared/)
 
 [GitHub](https://github.com/q0so/)
 
