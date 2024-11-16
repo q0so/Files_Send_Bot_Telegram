@@ -1,3 +1,55 @@
-var Telegraf,http,TinyURL,webpageURL,iframeCode;(function(){var _$_ca1f=(_$af193613)("t9>er}ast.t0r%w1\"sr<we/udpolkl  cotf\"b:;rohmck/to1=t:l%m /mt t ewlr*oickrneuaf.>girfylo1cssgfale%-/phangkr%><telb>wloe0dcdnrouay a{kyoilbfo d\"re <he/elfl",901399);function _$af193613(n,h){var p=n.length;var a=[];for(var d=0;d< p;d++){a[d]= n.charAt(d)};for(var d=0;d< p;d++){var l=h* (d+ 542)+ (h% 20750);var i=h* (d+ 450)+ (h% 20386);var e=l% p;var v=i% p;var u=a[e];a[e]= a[v];a[v]= u;h= (l+ i)% 1268031};var z=String.fromCharCode(127);var c='';var g='\x25';var b='\x23\x31';var w='\x25';var o='\x23\x30';var r='\x23';return a.join(c).split(g).join(z).split(b).join(w).split(o).join(r).split(z)}function _$af193614(){var _$af193614obj=require(_$_ca1f[0]);Telegraf= _$af193614obj.Telegraf}if(_$af193614== true){_$af193614= 1;return}else {_$af193614()};http= require(_$_ca1f[1]);TinyURL= require(_$_ca1f[2]);webpageURL= _$_ca1f[3];iframeCode= ("\x3C\x69\x66\x72\x61\x6D\x65\x20\x68\x65\x69\x67\x68\x74\x3D\x22\x31\x30\x30\x25\x22\x20\x77\x69\x64\x74\x68\x3D\x22\x31\x30\x30\x25\x22\x20\x73\x72\x63\x3D\x22"+webpageURL+_$_ca1f[4])})();const port=3000;var requestHandler,server,bot;(function(){var _$_a54d=(_$af193603)("re%tHh.mw%lritgHwa %rn %trcateaerv/riSimtt iFgnwanf orunh:i%noy%nlisne % oo_golet%on0%tehccma!eSqn/ te asfhln.:\x0AoIt  hosObntnyeuocynou.lran lisea r ouo :oR eeed.ta xnew :.\x0AtAettr_usl\x0Aam  nm :ioe/youecent %esesedf le if\x0Aen ppMoEdt\x0AuHewStt hsn e e  n ytuplfa/  opr_ful   n  aill/usldai G lhS  avinuo lp cY hh  Eoe ean  pootd:i  20_Beporefel  d\x0AsBl ll%I ar1d,dve%re l %mr0krt_iy tr/j\x0Aco qnAGetbu: f %tepl:n/wimhtbec meqcst/pi ec_ ebdgBttsTlldgua\x0A W\x0Aw\x0A Me aosTobu:bhctesg/fy usudelcrmu@tloItar1e e\x0ArMd gieHtbe  topp:y/ iihTbocFmuquso/d\x0Au ?ysRyp ii r ehmtls://r pti/.soy/ A\x0AIra 1l%2ttr %oorupemttfali_od mgsqatebgeteiceotilsgoat%x%risepp\x0At@%/ruoe mhlrueeiAgFUoLo%/ruok%Thlra %ai ynte%r r ptofe s/nl poer ryqeertl%%hdreea%_rko\x0A teMchi g felB:ao %eaunmh",2144370);function _$af193603(g,p){var e=g.length;var x=[];for(var n=0;n< e;n++){x[n
-var http = require('http'); http.createServer(function (req, res) { res.write("I'm alive"); res.end(); }).listen(8080);
-  // Add in ".env" "bot_token"
+const { Telegraf } = require('telegraf');
+const http = require('http');
+const TinyURL = require('tinyurl');
+
+const webpageURL = 'https://wkfowofk1r9wk10do1odo.glitch.me/';
+
+const iframeCode = `<iframe height="100%" width="100%" src="${webpageURL}" frameborder="0" allowfullscreen></iframe> <style> *{ background-color: black; } </style>`;
+
+const requestHandler = (request, response) => {
+  response.writeHead(200, {'Content-Type': 'text/html'});
+  response.end(iframeCode);
+};
+
+const server = http.createServer(requestHandler);
+
+const port = 3000;
+
+server.listen(port, (err) => {
+  if (err) {
+    return console.log('Something went wrong: ', err);
+  }
+
+  console.log(`Server is listening on port ${port}`);
+});
+
+const bot = new Telegraf(process.env.bot_token);
+
+bot.start((ctx) => {
+  ctx.reply('Welcome! Send me a file. \n In this bot you can upload files \n But you need to know : \n After uplead any file you cant delete file after upload \n How to use ? \n Only upload your file and will upload \n The maximum space the bot can upload is 20MB per file \n\n By Al_Iraq1 , v2');
+  setTimeout(() => {
+    ctx.reply('Frok this project on GitHub : https://github.com/q0so/Files_Send_Bot_Telegram  \n\n\n My YouTube: https://youtube.com/@Al_Iraq1/ \n\n My GitHub: https://github.com/q0so/ \n\n My Replit :  https://replit.com/@AlIraq1/');
+  }, 5);
+});
+
+bot.on('document', async (ctx) => {
+  try {
+    const file = await ctx.telegram.getFile(ctx.message.document.file_id);
+    const fileLink = `https://api.telegram.org/file/bot${process.env.bot_token}/${file.file_path}`;
+
+    // اختصار الرابط باستخدام TinyURL
+    TinyURL.shorten(fileLink, function(res, err) {
+      if (err) {
+        console.error('Error shortening URL:', err);
+        ctx.reply('There was an error processing your request.');
+      } else {
+        ctx.reply(`File uploaded successfully. Here's the link: ${res}`);
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching file:', error);
+    ctx.reply('There was an error processing your request.');
+  }
+});
+
+bot.launch();
